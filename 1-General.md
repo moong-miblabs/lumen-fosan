@@ -87,7 +87,7 @@ $router->get('/', function () use ($router) {
 ```
 7. Akses `https://example.mibplus.id/` apakah sudah muncul `APP_NAME` yang ada di env?
 8. CorsMiddleware
-	1. Buat file `CorsMiddleware.php` in `app/Http/Middleware/CorsMiddleware.php`
+	1. Buat file `CorsMiddleware.php` pada `app/Http/Middleware`, sehingga menjadi `app/Http/Middleware/CorsMiddleware.php`
 	```php
 	<?php
 
@@ -139,7 +139,7 @@ $router->get('/', function () use ($router) {
         }
     }
 	```
-	2. Daftarkan CorsMiddleware sebagai global middleware in `bootstrap/app.php`
+	2. Daftarkan CorsMiddleware sebagai global middleware pada `bootstrap/app.php`
 	```php
 	/*
 	|--------------------------------------------------------------------------
