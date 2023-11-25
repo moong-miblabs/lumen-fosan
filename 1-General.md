@@ -1,7 +1,7 @@
 # GENERAL
 
 1. Buat sub-domain `example.mibplus.id`
-2. Instal Laravel via composer `composer create-project --prefer-dist laravel/lumen example.mibplus.id` ~2023-11~
+2. Instal Laravel via composer `composer create-project --prefer-dist laravel/lumen example.mibplus.id` <sub>2023-11</sub>
 3. Buat Database PostgreSQL, mibplusi_example
 4. sesuaikan env
 
@@ -57,6 +57,7 @@ DB_PASSWORD=bar
 
 >
 > `APP_TIMEZONE` diisi dengan timezoneID, `Asia/Jakarta` untuk `WIB`, `Asia/Makassar` untuk `WITA`, `Asia/Jayapura` untuk `WIT`
+>
 > Variabel dalam .env harus diapit *double quote* (") jika mengandung *space*
 >
 
@@ -158,7 +159,7 @@ $router->get('/', function () use ($router) {
 	//     'auth' => App\Http\Middleware\Authenticate::class,
 	// ]);
 	```
-9. Handle 404 Not Found pada `app/Exceptions/Handler.php`
+9. Handle `404 Not Found` pada `app/Exceptions/Handler.php`
 Tambahkan baris
 ```php
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
