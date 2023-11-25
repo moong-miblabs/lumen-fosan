@@ -45,7 +45,7 @@ class SetupModel extends Model {
 
 ```
 
-5. Buat Controller `Setup` di `app/Http/Controllers`, sehingga menjadi `app/Http/Controllers/Setup`
+5. Buat Controller `Setup` di `app/Http/Controllers`, sehingga menjadi `app/Http/Controllers/Setup.php`
 6. Import `SetupModel` dengan syntax `use App\Models\SetupModel as Model;` pada `Setup`. Karena `SetupModel` di `Setup` Controller harus bernama `Model`
 7. Buat 3 *method* dengan nama : dbsync, seed di dalam *Setup class*
 ```php

@@ -4,18 +4,18 @@
 1. Install uuid via composer `composer require ramsey/uuid` <sub>2023-11</sub>
 2. Install carbon via composer `composer require nesbot/carbon` <sub>2023-11</sub>
 3. Install to-raw-sql via composer `composer require pyaesoneaung/to-raw-sql` <sub>2023-11</sub>
-4. Buat model `UserModel` di `app/Models`
+4. Buat model `UserModel` di `app/Models`, sehingga menjadi `app/Models/UserModel.php`
 5. Import
     1. `Illuminate\Support\Facades\DB` dengan manambahkan baris `use Illuminate\Support\Facades\DB;`
     2. `Ramsey\Uuid\Uuid` dengan menambahkan baris `use Ramsey\Uuid\Uuid;`
     3. `Carbon\Carbon` dengan manambahkan baris `use Carbon\Carbon;`
 6. Tambakan property/attribute di dalam *class*
-    1. protected $table = 'users';
-    2. static $tabel           = 'users';
-    3. static $columns         = ['id','nama_user','username_user','password_user','created_at','updated_at','deleted_at'];
-    4. static $write_columns   = ['nama_user','username_user','password_user'];
-    5. static $read_columns    = ['id','nama_user','username_user','password_user'];
-    6. static $order           = [['created_at', 'desc'], ['id', 'desc']];
+    1. `protected $table = 'users';`
+    2. `static $tabel           = 'users';`
+    3. `static $columns         = ['id','nama_user','username_user','password_user','created_at','updated_at','deleted_at'];`
+    4. `static $write_columns   = ['nama_user','username_user','password_user'];`
+    5. `static $read_columns    = ['id','nama_user','username_user','password_user'];`
+    6. `static $order           = [['created_at', 'desc'], ['id', 'desc']];`
 7. Buat *method* di dalam *UserModel class*
     1. create()
     ```php
@@ -513,7 +513,7 @@
 8. Jika ingin membuat standar model lainnya, ulangi langkah 4 - 7. Jangan lupa penyesuaian pada langkah 6.
 
 ## STANDAR CONTROLLER
-1. Buat controller `User` di `app/Http/Controllers` 
+1. Buat controller `User` di `app/Http/Controllers`, sehingga menjadi `app/Http/Controllers/User.php`
 2. Import model `UserModel` dengan syntax `use App\Models\UserModel as Model;` pada `User`. Karena `UserModel` di `User` Controller harus bernama `Model`
 3. Buat *method* di dalam *User class*
     1. register()
