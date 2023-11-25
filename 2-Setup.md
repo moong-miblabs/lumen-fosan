@@ -128,7 +128,7 @@ $router->group(['prefix'=>'setup'],function () use ($router,$controller) {
 ```
 10. Akses `http://book-be.local/api/setup/dbsync`, kemudian cek apakah tabel sudah terbuat
 11. Akses `http://book-be.local/api/setup/seed`, kemudian cek apakah tabel sudah terisi
-12. Akses `http://book-be.local/api/setup/seed`, untuk menghapus tabel apabila diperlukan
+12. Akses `http://book-be.local/api/setup/drop`, untuk menghapus tabel apabila diperlukan
 13. Jika tabel sudah terbuat maka, **WAJIB** comment router group
 ```php
 // $controller = 'Setup';
