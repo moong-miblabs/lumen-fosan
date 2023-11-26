@@ -16,6 +16,6 @@ git add app/Helper
 git add bootstrap
 git add routes
 
-git commit -m "nineth commit"
+git commit -m "tenth commit"
 git push -u origin main
 ```

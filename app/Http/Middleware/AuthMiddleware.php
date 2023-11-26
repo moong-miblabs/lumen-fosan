@@ -11,7 +11,7 @@ use App\Helper\JsonwebtokenHelper;
 class AuthMiddleware {
     
     public function handle(Request $request, Closure $next): Response {
-        $token = $request->header('Authorization');
+        $token = $request->bearerToken()?$request->bearerToken():$request->header('Authorization');
         if(!$token) {
             if ($request->isMethod('post')) {
                 $token = $request->input('token');
