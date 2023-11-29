@@ -4,40 +4,41 @@
 
 ### String
 
-|Tipe Data|Mysql|
-|--|--|
-|STRING|VARCHAR(255)|
-|TEXT|TEXT|
-|CHAR|CHAR(255)|
+|Tipe Data|Mysql|PostgreSQL|
+|--|--|--|
+|STRING|VARCHAR(255)|VARCHAR(255)|
+|TEXT|TEXT|TEXT|
+|CHAR|CHAR(255)|CHAR(255)|
 
 ### Boolean
 
-|Tipe Data|Mysql|
-|--|--|
-|BOOLEAN|BOOLEAN|
+|Tipe Data|Mysql|PostgreSQL|
+|--|--|--|
+|BOOLEAN|BOOLEAN|BOOLEAN|
 
 ### Integer
 
-|Tipe Data|Mysql|
-|--|--|
-|TINYINT|TINYINT|
-|SMALLINT|SMALLINT|
-|INTEGER|INTEGER|
-|BIGINT|BIGINT|
+|Tipe Data|Mysql|PostgreSQL
+|--|--|--|
+|TINY INTEGER|TINYINT|SMALLINT|
+|SMALL INTEGER|SMALLINT|SMALLINT|
+|MEDIUM INTEGER|INT|INT|
+|INTEGER|INT|INT|
+|BIG INTIGER|BIGINT|BIGINT|
 
 ### Float (desimal)
 
-|Tipe Data|Mysql|
-|--|--|
-|FLOAT|FLOAT|
+|Tipe Data|Mysql|PostgreSQL|
+|--|--|--|
+|FLOAT|FLOAT|REAL|
 
 ### Tanggal
 
-|Tipe Data|Mysql|
-|--|--|
-|DATE|DATETIME|
-|DATE ONLY|DATE|
-|TIME ONLY|TIME|
+|Tipe Data|Mysql|PostgreSQL|
+|--|--|--|
+|DATE|DATETIME|TIMESTAMP WITH TIME ZONE|
+|DATE ONLY|DATE|DATE|
+|TIME ONLY|TIME|TIME|
 
 ## PENAMAAN TABEL dan KOLOM
 
@@ -50,9 +51,9 @@ setiap tabel harus punya kolom `id` dengan tipe data `CHAR(36)` sebagai `PRIMARY
 ## PARAMETER WAKTU 
 
 setiap tabel harus punya parameter waktu
-1. `created_at` dengan tipe data `DATETIME` dan tidak boleh null `NOT NULL` 
-2. `updated_at` dengan tipe data `DATETIME` dan tidak boleh null `NOT NULL` 
-3. `deleted_at` dengan tipe data `DATETIME` dan default null `DEFAULT NULL` 
+1. `created_at` dengan tipe data `DATETIME` / `TIMESTAMP WITH TIME ZONE` dan tidak boleh null `NOT NULL` 
+2. `updated_at` dengan tipe data `DATETIME` / `TIMESTAMP WITH TIME ZONE` dan tidak boleh null `NOT NULL` 
+3. `deleted_at` dengan tipe data `DATETIME` / `TIMESTAMP WITH TIME ZONE` dan default null `DEFAULT NULL` 
 
 >
 > Tabel yang mengikuti 'aturan tabel' ini, dapat dibaca dengan mudah oleh 'standar model'

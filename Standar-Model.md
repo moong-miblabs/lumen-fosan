@@ -188,7 +188,7 @@ WHERE foo = 'bar' AND foz <> 'baz'
 
 3. String dengan binding
 ```php
-$where 			= "foo = ? AND foz <> ?";
+$where 		= "foo = ? AND foz <> ?";
 $where_values 	= ['bar','baz'];
 ```
 
