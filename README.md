@@ -8,6 +8,9 @@ git add 3-Standar.md
 git add 4-Helper-Login.md
 git add 5-AuthMiddleware.md
 
+git add Aturan-Tabel.md
+git add Standar-Model.md
+
 git add .env
 git add .env.example
 git add app/Http
@@ -16,6 +19,6 @@ git add app/Helper
 git add bootstrap
 git add routes
 
-git commit -m "tenth commit"
+git commit -m "eleventh commit"
 git push -u origin main
 ```
