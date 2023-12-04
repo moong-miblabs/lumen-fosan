@@ -12,6 +12,9 @@ menjadi
 ```text
 APP_NAME="Back-End Posyandu Lansia (Polandia) by Mr Munji (UNDIP) at Nov 2023 for Postgraduate Thesis"
 ```
+>
+> Variabel dalam .env harus diapit *double quote* (") jika mengandung *space*
+>
 ---
 ```text
 APP_KEY=
@@ -36,6 +39,9 @@ menjadi
 ```text
 APP_TIMEZONE=Asia/Jakarta
 ```
+>
+> `APP_TIMEZONE` diisi dengan timezoneId, `Asia/Jakarta` untuk `WIB`, `Asia/Makassar` untuk `WITA`, `Asia/Jayapura` untuk `WIT`
+>
 ---
 ```text
 DB_CONNECTION=mysql
@@ -54,23 +60,16 @@ DB_DATABASE=mibplusi_example
 DB_USERNAME=foo
 DB_PASSWORD=bar
 ```
-
 >
-> `APP_TIMEZONE` diisi dengan timezoneId, `Asia/Jakarta` untuk `WIB`, `Asia/Makassar` untuk `WITA`, `Asia/Jayapura` untuk `WIT`
->
-
->
-> Variabel dalam .env harus diapit *double quote* (") jika mengandung *space*
+> DB_CONNECTION dapat diisi dengan `pgsql` atau `mysql`
 >
 
-5. Copy index.php dan .htaccess dari folder `public`, paste ke `ROOT`. dalam file `index.php`, ganti path menjadi `bootstrap/app.php`
-```php
-$app = require __DIR__.'/../bootstrap/app.php';
-```
+
+5. Ubah Document root domain via cpanel
+:house:/example.mibplus.id
 menjadi
-```php
-$app = require __DIR__.'/bootstrap/app.php';
-```
+:house:/example.mibplus.id/public
+
 6. Ubah `web.php` di `routes/web.php`
 ```php
 <?php

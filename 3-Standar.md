@@ -665,3 +665,17 @@
     }
     ```
 4. Jika ingin membuat standar controller lainnya, ulangi langkah 1 - 3. Jangan lupa penyesuaian pada langkah 2.
+
+## STANDAR ROUTE
+
+```php
+<?php
+$controller = 'User';
+$router->group(['prefix'=>'user','middleware'=>'auth'], function () use ($router,$controller) {
+    Route::post('register',         $controller.'@'.'register');
+    Route::post('update/{id}',      $controller.'@'.'update');
+    Route::get('delete/{id}',       $controller.'@'.'delete');
+    Route::get('list',              $controller.'@'.'list');
+    Route::get('detail-by-id/{id}', $controller.'@'.'detailById');
+});
+```

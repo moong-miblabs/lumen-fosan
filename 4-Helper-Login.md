@@ -123,7 +123,7 @@ public function verify(Request $request){
 ```php
 $controller = 'Login';
 $router->group(['prefix'=>'login'],function () use ($router,$controller) {
-    Route::post('/',$controller.'@'.'Login');
-    Route::post('verify',$controller.'@'.'verify');
+    Route::post('/',        $controller.'@'.'Login');
+    Route::post('verify',   $controller.'@'.'verify');
 });
 ```

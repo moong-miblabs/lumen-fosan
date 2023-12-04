@@ -2,7 +2,7 @@
 
 ## Membuat AuthMiddleware
 1. Buat Middleware dengan nama `AuthMiddleware`, file `AuthMiddleware.php` menjadi `App/Http/Middleware/AuthMiddleware.php`
-2. Import `BcryptHelper` dengan menambahkan baris `use App\Helper\BcryptHelper;`
+2. Import `JsonwebtokenHelper` dengan menambahkan baris `use App\Helper\JsonwebtokenHelper;`
 3. Buatlah script untuk cek `Authorization` pada header, jika tidak punya. ceklah `token` pada `body` jika request method `POST`, atau di `query` jika request method `GET`
 4. Jika `Authorization` atau `token` tidak dikirimkan, maka response dengan status 401
 5. Jika dikirimkan, maka coba untuk 'buka' token tersebut
@@ -84,21 +84,21 @@ $app->routeMiddleware([
 ```php
 $controller = 'User';
 $router->group(['prefix'=>'user'],function () use ($router,$controller) {
-    Route::post('register',$controller.'@'.'register');
-    Route::post('update/{id}',$controller.'@'.'update');
-    Route::get('delete/{id}',$controller.'@'.'delete');
-    Route::get('list',$controller.'@'.'list');
-    Route::get('detail-by-id/{id}',$controller.'@'.'detailById');
+    Route::post('register',         $controller.'@'.'register');
+    Route::post('update/{id}',      $controller.'@'.'update');
+    Route::get('delete/{id}',       $controller.'@'.'delete');
+    Route::get('list',              $controller.'@'.'list');
+    Route::get('detail-by-id/{id}', $controller.'@'.'detailById');
 });
 ```
 menjadi
 ```php
 $controller = 'User';
 $router->group(['prefix'=>'user','middleware'=>'auth'],function () use ($router,$controller) {
-    Route::post('register',$controller.'@'.'register');
-    Route::post('update/{id}',$controller.'@'.'update');
-    Route::get('delete/{id}',$controller.'@'.'delete');
-    Route::get('list',$controller.'@'.'list');
-    Route::get('detail-by-id/{id}',$controller.'@'.'detailById');
+    Route::post('register',         $controller.'@'.'register');
+    Route::post('update/{id}',      $controller.'@'.'update');
+    Route::get('delete/{id}',       $controller.'@'.'delete');
+    Route::get('list',              $controller.'@'.'list');
+    Route::get('detail-by-id/{id}', $controller.'@'.'detailById');
 });
 ```
