@@ -66,9 +66,12 @@ DB_PASSWORD=bar
 
 
 5. Ubah Document root domain via cpanel
-:house:/example.mibplus.id
+
+:house: /example.mibplus.id
+
 menjadi
-:house:/example.mibplus.id/public
+
+:house: /example.mibplus.id/public
 
 6. Ubah `web.php` di `routes/web.php`
 ```php
