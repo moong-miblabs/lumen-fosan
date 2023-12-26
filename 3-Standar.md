@@ -606,11 +606,11 @@
         }
 
         // CUSTOM OPERATOR
-        $mapped_input = array_map( function($value,$key) {
-            if($key=='nama_user') return [$key,'like','%'.$value.'%'];
-            return [$key,'=',$value];
-        }, array_values($input), array_keys($input));
-        $input = $mapped_input;
+            $mapped_input = array_map( function($value,$key) {
+                if($key=='nama_user') return [$key,'ilike','%'.$value.'%'];
+                return [$key,'=',$value];
+            }, array_values($input), array_keys($input));
+            $input = $mapped_input;
         // END CUSTOM OPERATOR
 
         $input_option = array_merge($input_option,['where'=>$input]);
@@ -666,7 +666,7 @@
     ```
 4. Jika ingin membuat standar controller lainnya, ulangi langkah 1 - 3. Jangan lupa penyesuaian pada langkah 2.
 
-## STANDAR ROUTE
+## STANDAR ROUTING
 
 ```php
 <?php

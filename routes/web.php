@@ -24,6 +24,11 @@ $router->get('/', function () use ($router) {
 //     Route::get('drop',$controller.'@'.'drop');
 // });
 
+$router->post('raw', [
+    'middleware'    => 'auth',
+    'uses'          => 'Raw@index'
+]);
+
 $controller = 'User';
 $router->group(['prefix'=>'user','middleware'=>'auth'],function () use ($router,$controller) {
     Route::post('register',$controller.'@'.'register');
