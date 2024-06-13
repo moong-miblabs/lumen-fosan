@@ -121,9 +121,9 @@ class Setup extends Controller {
 ```php
 $controller = 'Setup';
 $router->group(['prefix'=>'setup'],function () use ($router,$controller) {
-    Route::get('dbsync',$controller.'@'.'dbsync');
-    Route::get('seed',$controller.'@'.'seed');
-    Route::get('drop',$controller.'@'.'drop');
+    $router->get('dbsync',$controller.'@'.'dbsync');
+    $router->get('seed',$controller.'@'.'seed');
+    $router->get('drop',$controller.'@'.'drop');
 });
 ```
 10. Akses `http://book-be.local/api/setup/dbsync`, kemudian cek apakah tabel sudah terbuat
@@ -133,8 +133,8 @@ $router->group(['prefix'=>'setup'],function () use ($router,$controller) {
 ```php
 // $controller = 'Setup';
 // $router->group(['prefix'=>'setup'],function () use ($router,$controller) {
-//     Route::get('dbsync',$controller.'@'.'dbsync');
-//     Route::get('seed',$controller.'@'.'seed');
-//     Route::get('drop',$controller.'@'.'drop');
+//     $router->get('dbsync',$controller.'@'.'dbsync');
+//     $router->get('seed',$controller.'@'.'seed');
+//     $router->get('drop',$controller.'@'.'drop');
 // });
 ```
