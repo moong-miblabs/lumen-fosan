@@ -2,7 +2,7 @@
 
 ## STANDAR MODEL
 1. Install uuid via composer `composer require ramsey/uuid` <sub>2023-11</sub>
-2. Install carbon via composer `composer require nesbot/carbon` <sub>2023-11</sub>
+2. Install carbon via composer `composer require nesbot/carbon:2.72.5` <sub>2023-11</sub>
 3. Install to-raw-sql via composer `composer require pyaesoneaung/to-raw-sql` <sub>2023-11</sub>
 4. Buat model `UserModel` di `app/Models`, sehingga menjadi `app/Models/UserModel.php`
 5. Import
