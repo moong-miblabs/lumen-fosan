@@ -783,103 +783,22 @@
     2. registerBulk()
     ```php
     public function registerBulk(Request $request) {
-	    $body = $request->post();
-	
-	    if(!(array_key_exists('bulk_data', $body) && is_array($body['bulk_data']) && array_is_list($body['bulk_data']) && !empty($body['bulk_data']))) {
-	        $res = new \stdClass();
-	        $res->error_code = 400;
-	        $res->error_desc = 'bulk_data not exists or bulk_data is not array or bulk_data is nor array list or bulk_data is empty array';
-	        $res->data = [];
-	
-	        return response()->json($res,200);
-	    }
-	
-	    $arrObj     = $request->only(['bulk_data']);
-	    $additional = $request->except(['bulk_data']);
-	
-	    try {
-	        $data = Model::bulkCreate($arrObj,$additional);
-	
-	        $res = new \stdClass();
-	        $res->error_code = 0;
-	        $res->error_desc = '';
-	        $res->data = $data;
-	
-	        return response()->json($res,200);
-	    } catch(\Exception $e) {
-	        $res = new \stdClass();
-	        $res->error_code = 500;
-	        $res->error_desc = 'Internal Server Error';
-	        $res->data = env('APP_DEBUG')?$e->getMessage():[];
-	        return response()->json($res,200);
-	    }
-	}
-    ```
-    3. sync()
-    ```php
-    public function sync(Request $request) {
-	    $body = $request->post();
-	
-	    if(!(array_key_exists('bulk_data', $body) && is_array($body['bulk_data']) && array_is_list($body['bulk_data']) && !empty($body['bulk_data']))) {
-	        $res = new \stdClass();
-	        $res->error_code = 400;
-	        $res->error_desc = 'bulk_data not exists or bulk_data is not array or bulk_data is nor array list or bulk_data is empty array';
-	        $res->data = [];
-	
-	        return response()->json($res,200);
-	    }
-	
-	    $arrObj     = $request->only(['bulk_data']);
-	    $additional = $request->except(['bulk_data']);
-	
-	    try {
-	        $data = Model::bulkSync($arrObj,$additional);
-	
-	        $res = new \stdClass();
-	        $res->error_code = 0;
-	        $res->error_desc = '';
-	        $res->data = $data;
-	
-	        return response()->json($res,200);
-	    } catch(\Exception $e) {
-	        $res = new \stdClass();
-	        $res->error_code = 500;
-	        $res->error_desc = 'Internal Server Error';
-	        $res->data = env('APP_DEBUG')?$e->getMessage():[];
-	        return response()->json($res,200);
-	    }
-	}
-    ```  
-    4. update()
-    ```php
-    public function update(Request $request, $id = null) {
-	    if(is_null($id)) $id = $request->post('id');
-	
-	    $body = $request->post()->except('id');
-	    
-	    try {
-	        $data = Model::_update($body,['id'=>$id]);
-	
-	        $res = new \stdClass();
-	        $res->error_code = 0;
-	        $res->error_desc = '';
-	        $res->data = $data;
-	
-	        return response()->json($res,200);
-	    } catch(\Exception $e) {
-	        $res = new \stdClass();
-	        $res->error_code = 500;
-	        $res->error_desc = 'Internal Server Error';
-	        $res->data = env('APP_DEBUG')?$e->getMessage():[];
-	        return response()->json($res,200);
-	    }
-	}
-    ```
-    5. delete()
-    ```php
-    public function delete(Request $request, $id = null) {
+        $body = $request->post();
+
+        if(!(array_key_exists('bulk_data', $body) && is_array($body['bulk_data']) && array_is_list($body['bulk_data']) && !empty($body['bulk_data']))) {
+            $res = new \stdClass();
+            $res->error_code = 400;
+            $res->error_desc = 'bulk_data not exists or bulk_data is not array or bulk_data is not array list or bulk_data is empty array';
+            $res->data = [];
+
+            return response()->json($res,200);
+        }
+
+        $arrObj     = $request->only(['bulk_data']);
+        $additional = $request->except(['bulk_data']);
+
         try {
-            $data = Model::destroy(['id'=>$id]);
+            $data = Model::bulkCreate($arrObj['bulk_data'],$additional);
 
             $res = new \stdClass();
             $res->error_code = 0;
@@ -896,37 +815,115 @@
         }
     }
     ```
+    3. sync()
+    ```php
+    public function sync(Request $request) {
+        $body = $request->post();
+
+        if(!(array_key_exists('bulk_data', $body) && is_array($body['bulk_data']) && array_is_list($body['bulk_data']) && !empty($body['bulk_data']))) {
+            $res = new \stdClass();
+            $res->error_code = 400;
+            $res->error_desc = 'bulk_data not exists or bulk_data is not array or bulk_data is nor array list or bulk_data is empty array';
+            $res->data = [];
+
+            return response()->json($res,200);
+        }
+
+        $arrObj     = $request->only(['bulk_data']);
+        $additional = $request->except(['bulk_data']);
+
+        try {
+            $data = Model::bulkSync($arrObj['bulk_data'],$additional);
+
+            $res = new \stdClass();
+            $res->error_code = 0;
+            $res->error_desc = '';
+            $res->data = $data;
+
+            return response()->json($res,200);
+        } catch(\Exception $e) {
+            $res = new \stdClass();
+            $res->error_code = 500;
+            $res->error_desc = 'Internal Server Error';
+            $res->data = env('APP_DEBUG')?$e->getMessage():[];
+            return response()->json($res,200);
+        }
+    }
+    ```  
+    4. update()
+    ```php
+    public function update(Request $request, $id = null) {
+        if(is_null($id)) $id = $request->post('id');
+
+        $body = $request->except('id');
+        
+        try {
+            $data = Model::_update($body,['id'=>$id]);
+
+            $res = new \stdClass();
+            $res->error_code = 0;
+            $res->error_desc = '';
+            $res->data = $data[0];
+
+            return response()->json($res,200);
+        } catch(\Exception $e) {
+            $res = new \stdClass();
+            $res->error_code = 500;
+            $res->error_desc = 'Internal Server Error';
+            $res->data = env('APP_DEBUG')?$e->getMessage():[];
+            return response()->json($res,200);
+        }
+    }
+    ```
+    5. delete()
+    ```php
+    public function delete(Request $request, $id = null) {
+        if(is_null($id)) $id = $request->post('id');
+        try {
+            $data = Model::destroy(['id'=>$id]);
+
+            $res = new \stdClass();
+            $res->error_code = 0;
+            $res->error_desc = '';
+            $res->data = $data[0];
+
+            return response()->json($res,200);
+        } catch(\Exception $e) {
+            $res = new \stdClass();
+            $res->error_code = 500;
+            $res->error_desc = 'Internal Server Error';
+            $res->data = env('APP_DEBUG')?$e->getMessage():[];
+            return response()->json($res,200);
+        }
+    }
+    ```
 
     6. list()
     ```php
     public function list(Request $request) {
-        $input = $request->all();
+        $input_option = [];
 
-        $input_option   = [];
-        $count          = false;
+        $page   = $request->input('page');
+        $limit  = $request->input('limit');
 
-        if(array_key_exists('page',$input) && array_key_exists('limit',$input)) {
-            $input_option = array_merge($input_option, ['limit'     => $input['limit']]);
-            $input_option = array_merge($input_option, ['offset'    => $input['limit'] * ($input['page'] - 1)]);
-            $count = true;
+        if ($page && $limit) {
+            $input_option['limit']  = $limit;
+            $input_option['offset'] = $limit * ($page-1);
         }
 
-        if(array_key_exists('sort_by',$input) && array_key_exists('sort_type',$input)) {
-            $input_option = array_merge($input_option, ['order'     => [$input['sort_by'],$input['sort_type']]]);
+        $sort_by    = $request->input('sort_by');
+        $sort_type  = $request->input('sort_type');
+
+        if ($sort_by) {
+            if($sort_type == 'desc' || $sort_type == 'DESC') {
+                $input_option['order'] = $sort_by . " DESC";
+            } else {
+                $input_option['order'] = $sort_by . " ASC";
+            }
         }
-
-        // CUSTOM OPERATOR
-            $mapped_input = array_map( function($value,$key) {
-                if($key=='nama_user') return [$key,'ilike','%'.$value.'%'];
-                return [$key,'=',$value];
-            }, array_values($input), array_keys($input));
-            $input = $mapped_input;
-        // END CUSTOM OPERATOR
-
-        $input_option = array_merge($input_option,['where'=>$input]);
 
         try {
-            if ($count) {
+            if ($page && $limit) {
                 $data = Model::findAndCountAll($input_option);
             } else {
                 $data = Model::findAll($input_option);
@@ -935,9 +932,11 @@
             $res = new \stdClass();
             $res->error_code = 0;
             $res->error_desc = '';
-            if($count){
+            if($page && $limit){
                 $res->data      = $data['data'];
                 $res->num_rows  = $data['num_rows'];
+                $res->page      = intval($page);
+                $res->limit     = intval($limit);
             } else {
                 $res->data = $data;
             }
