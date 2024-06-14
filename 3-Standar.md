@@ -749,7 +749,8 @@
     	return TRUE;
     }
     ``` 
-9. Jika ingin membuat standar model lainnya, ulangi langkah 4 - 7. Jangan lupa penyesuaian pada langkah 6.
+9. Jika ingin membuat standar model lainnya, ulangi langkah 5 - 8. Jangan lupa penyesuaian pada langkah 7.
+10. Untuk type data id (primary key) yang berbeda, akan ada perbedaan pada *method* create(), bulkCreate(), bulkSync(), findOrCreate()
 
 ## STANDAR CONTROLLER
 1. Buat controller `User` di `app/Http/Controllers`, sehingga menjadi `app/Http/Controllers/User.php`
