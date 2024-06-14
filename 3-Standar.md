@@ -753,20 +753,17 @@
 10. Untuk type data id (primary key) yang berbeda, akan ada perbedaan pada *method* create(), bulkCreate(), bulkSync(), findOrCreate()
 
 ## STANDAR CONTROLLER
-1. Buat controller `User` di `app/Http/Controllers`, sehingga menjadi `app/Http/Controllers/User.php`
-2. Import model `UserModel` dengan syntax `use App\Models\UserModel as Model;` pada `User`. Karena `UserModel` di `User` Controller harus bernama `Model`
-3. Buat *method* di dalam *User class*
+1. Install validation via composer `composer require respect/validation` <sub>2024-06</sub>
+2. Buat controller `User` di `app/Http/Controllers`, sehingga menjadi `app/Http/Controllers/User.php`
+3. Import model `UserModel` dengan syntax `use App\Models\UserModel as Model;` pada `User`. Karena `UserModel` di `User` Controller harus bernama `Model`
+4. Buat *method* di dalam *User class*
     1. register()
     ```php
     public function register(Request $request) {
         $body = $request->post();
 
         try {
-            if(array_key_exists('bulk_data', $body) && is_array($body['bulk_data']) && array_is_list($body['bulk_data'])) {
-                $data = Model::bulkCreate($body['bulk_data']);
-            } else {
-                $data = Model::create($body);
-            }
+            $data = Model::create($body);
 
             $res = new \stdClass();
             $res->error_code = 0;
@@ -783,7 +780,71 @@
         }
     }
     ```
-    2. update()
+    2. registerBulk()
+    ```php
+    public function registerBulk(Request $request) {
+        $body = $request->post();
+	if(!(array_key_exists('bulk_data', $body) && is_array($body['bulk_data']) && array_is_list($body['bulk_data']) && !empty($body['bulk_data']))) {
+	    $res = new \stdClass();
+	    $res->error_code = 400;
+            $res->error_desc = 'bulk_data not exists or bulk_data is not array or bulk_data is nor array list or bulk_data is empty array';
+            $res->data = [];
+
+            return response()->json($res,200);
+    	}
+    	$arrObj = $request->only(['bulk_data']);
+    	$additional = $request->except(['bulk_data']);
+        try {
+            $data = Model::bulkCreate($arrObj,$additional);
+
+            $res = new \stdClass();
+            $res->error_code = 0;
+            $res->error_desc = '';
+            $res->data = $data;
+
+            return response()->json($res,200);
+        } catch(\Exception $e) {
+            $res = new \stdClass();
+            $res->error_code = 500;
+            $res->error_desc = 'Internal Server Error';
+            $res->data = $e->getMessage();
+            return response()->json($res,200);
+        }
+    }
+    ```
+    3. bulkSync()
+    ```php
+    public function sync(Request $request) {
+        $body = $request->post();
+	if(!(array_key_exists('bulk_data', $body) && is_array($body['bulk_data']) && array_is_list($body['bulk_data']) && !empty($body['bulk_data']))) {
+	    $res = new \stdClass();
+	    $res->error_code = 400;
+            $res->error_desc = 'bulk_data not exists or bulk_data is not array or bulk_data is nor array list or bulk_data is empty array';
+            $res->data = [];
+
+            return response()->json($res,200);
+    	}
+    	$arrObj = $request->only(['bulk_data']);
+    	$additional = $request->except(['bulk_data']);
+        try {
+            $data = Model::bulkSync($arrObj,$additional);
+
+            $res = new \stdClass();
+            $res->error_code = 0;
+            $res->error_desc = '';
+            $res->data = $data;
+
+            return response()->json($res,200);
+        } catch(\Exception $e) {
+            $res = new \stdClass();
+            $res->error_code = 500;
+            $res->error_desc = 'Internal Server Error';
+            $res->data = $e->getMessage();
+            return response()->json($res,200);
+        }
+    }
+    ```  
+    4. update()
     ```php
     public function update(Request $request, $id) {
         $body = $request->post();
@@ -805,7 +866,7 @@
         }
     }
     ```
-    3. delete()
+    5. delete()
     ```php
     public function delete(Request $request, $id) {
         try {
@@ -827,7 +888,7 @@
     }
     ```
 
-    4. list()
+    6. list()
     ```php
     public function list(Request $request) {
         $input = $request->all();
@@ -883,7 +944,7 @@
     }
     ```
 
-    5. detailById()
+    7. detailById()
     ```php
     public function detailById(Request $request, $id) {
         try {
@@ -904,7 +965,7 @@
         }
     }
     ```
-4. Jika ingin membuat standar controller lainnya, ulangi langkah 1 - 3. Jangan lupa penyesuaian pada langkah 2.
+5. Jika ingin membuat standar controller lainnya, ulangi langkah 2 - 4. Jangan lupa penyesuaian pada langkah 3.
 
 ## STANDAR ROUTING
 
