@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 use Carbon\Carbon;
-use Helper\ModelHelper;
+use App\Helper\ModelHelper;
 
 class UserModel extends Model {
     use HasFactory;
@@ -53,7 +53,7 @@ class UserModel extends Model {
     // IF INTERSECTION return empty obj, throw Exception
     // bulkCreate return Array same order with arrObj input
     public static function bulkCreate($arrObj, $additional = []){
-        $mapped = array_map(function($value) {
+        $mapped = array_map(function($value) use ($additional) {
         	$new_value = array_merge($value,$additional);
             $filtered = array_filter($new_value, fn($key) => in_array($key, self::$write_columns), ARRAY_FILTER_USE_KEY);
 
