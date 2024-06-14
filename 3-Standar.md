@@ -852,7 +852,7 @@
     ```  
     4. update()
     ```php
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id = null) {
         $body = $request->post();
         try {
             $data = Model::_update($body,['id'=>$id]);
@@ -874,7 +874,7 @@
     ```
     5. delete()
     ```php
-    public function delete(Request $request, $id) {
+    public function delete(Request $request, $id = null) {
         try {
             $data = Model::destroy(['id'=>$id]);
 
