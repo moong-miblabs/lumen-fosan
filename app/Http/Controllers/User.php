@@ -206,17 +206,4 @@ class User extends Controller {
             return response()->json($res,200);
         }
     }
-
-    public function test(Request $request){
-        try {
-            $data = Model::check('00000000-0000-0000-0000-000000000000');
-            return response()->json($data,200);
-        } catch (\Exception $e) {
-            $res = new \stdClass();
-            $res->error_code = 500;
-            $res->error_desc = 'Internal Server Error';
-            $res->data = env('APP_DEBUG')?$e->getMessage():[];
-            return response()->json($res,200);
-        }
-    }
 }
