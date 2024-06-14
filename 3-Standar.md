@@ -853,24 +853,27 @@
     4. update()
     ```php
     public function update(Request $request, $id = null) {
-        $body = $request->post();
-        try {
-            $data = Model::_update($body,['id'=>$id]);
-
-            $res = new \stdClass();
-            $res->error_code = 0;
-            $res->error_desc = '';
-            $res->data = $data;
-
-            return response()->json($res,200);
-        } catch(\Exception $e) {
-            $res = new \stdClass();
-            $res->error_code = 500;
-            $res->error_desc = 'Internal Server Error';
-            $res->data = env('APP_DEBUG')?$e->getMessage():[];
-            return response()->json($res,200);
-        }
-    }
+	    if(is_null($id)) $id = $request->post('id');
+	
+	    $body = $request->post()->except('id');
+	    
+	    try {
+	        $data = Model::_update($body,['id'=>$id]);
+	
+	        $res = new \stdClass();
+	        $res->error_code = 0;
+	        $res->error_desc = '';
+	        $res->data = $data;
+	
+	        return response()->json($res,200);
+	    } catch(\Exception $e) {
+	        $res = new \stdClass();
+	        $res->error_code = 500;
+	        $res->error_desc = 'Internal Server Error';
+	        $res->data = env('APP_DEBUG')?$e->getMessage():[];
+	        return response()->json($res,200);
+	    }
+	}
     ```
     5. delete()
     ```php
