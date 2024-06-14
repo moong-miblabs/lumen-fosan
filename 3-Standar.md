@@ -40,7 +40,7 @@
     4. `static $write_columns   = ['nama_user','email_user','username_user','password_user'];`
     5. `static $read_columns    = ['id','nama_user','email_user','username_user','password_user'];`
     6. `static $order           = [['created_at', 'desc'], ['id', 'desc']];`
-    7. `static $default 		= [];`
+    7. `static $default 	= [];`
 8. Buat *method* di dalam *UserModel class*
     1. create()
     ```php
