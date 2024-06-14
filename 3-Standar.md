@@ -775,7 +775,7 @@
             $res = new \stdClass();
             $res->error_code = 500;
             $res->error_desc = 'Internal Server Error';
-            $res->data = $e->getMessage();
+            $res->data = env('APP_DEBUG')?$e->getMessage():[];
             return response()->json($res,200);
         }
     }
@@ -807,7 +807,7 @@
             $res = new \stdClass();
             $res->error_code = 500;
             $res->error_desc = 'Internal Server Error';
-            $res->data = $e->getMessage();
+            $res->data = env('APP_DEBUG')?$e->getMessage():[];
             return response()->json($res,200);
         }
     }
@@ -839,7 +839,7 @@
             $res = new \stdClass();
             $res->error_code = 500;
             $res->error_desc = 'Internal Server Error';
-            $res->data = $e->getMessage();
+            $res->data = env('APP_DEBUG')?$e->getMessage():[];
             return response()->json($res,200);
         }
     }
@@ -861,7 +861,7 @@
             $res = new \stdClass();
             $res->error_code = 500;
             $res->error_desc = 'Internal Server Error';
-            $res->data = $e->getMessage();
+            $res->data = env('APP_DEBUG')?$e->getMessage():[];
             return response()->json($res,200);
         }
     }
@@ -882,7 +882,7 @@
             $res = new \stdClass();
             $res->error_code = 500;
             $res->error_desc = 'Internal Server Error';
-            $res->data = $e->getMessage();
+            $res->data = env('APP_DEBUG')?$e->getMessage():[];
             return response()->json($res,200);
         }
     }
@@ -938,7 +938,7 @@
             $res = new \stdClass();
             $res->error_code = 500;
             $res->error_desc = 'Internal Server Error';
-            $res->data = $e->getMessage();
+            $res->data = env('APP_DEBUG')?$e->getMessage():[];
             return response()->json($res,200);
         }
     }
@@ -960,7 +960,7 @@
             $res = new \stdClass();
             $res->error_code = 500;
             $res->error_desc = 'Internal Server Error';
-            $res->data = $e->getMessage();
+            $res->data = env('APP_DEBUG')?$e->getMessage():[];
             return response()->json($res,200);
         }
     }
