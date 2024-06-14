@@ -824,7 +824,7 @@
 	        $res->data = [];
 	
 	        return response()->json($res,200);
-		}
+	}
 	
 		$arrObj = $request->only(['bulk_data']);
 		$additional = $request->except(['bulk_data']);
