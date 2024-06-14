@@ -67,7 +67,7 @@ class User extends Controller {
         if(!(array_key_exists('bulk_data', $body) && is_array($body['bulk_data']) && array_is_list($body['bulk_data']) && !empty($body['bulk_data']))) {
             $res = new \stdClass();
             $res->error_code = 400;
-            $res->error_desc = 'bulk_data not exists or bulk_data is not array or bulk_data is nor array list or bulk_data is empty array';
+            $res->error_desc = 'bulk_data not exists or bulk_data is not array or bulk_data is not array list or bulk_data is empty array';
             $res->data = [];
 
             return response()->json($res,200);
