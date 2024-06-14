@@ -17,12 +17,12 @@ $router->get('/', function () use ($router) {
     return env('APP_NAME',$router->app->version());
 });
 
-// $controller = 'Setup';
-// $router->group(['prefix'=>'setup'],function () use ($router,$controller) {
-//     Route::get('dbsync',$controller.'@'.'dbsync');
-//     Route::get('seed',$controller.'@'.'seed');
-//     Route::get('drop',$controller.'@'.'drop');
-// });
+$controller = 'Setup';
+$router->group(['prefix'=>'setup'],function () use ($router,$controller) {
+    $router->get('dbsync',$controller.'@'.'dbsync');
+    $router->get('seed',$controller.'@'.'seed');
+    $router->get('drop',$controller.'@'.'drop');
+});
 
 $router->post('raw', [
     'middleware'    => 'auth',
@@ -30,12 +30,16 @@ $router->post('raw', [
 ]);
 
 $controller = 'User';
-$router->group(['prefix'=>'user','middleware'=>'auth'],function () use ($router,$controller) {
-    Route::post('register',$controller.'@'.'register');
-    Route::post('update/{id}',$controller.'@'.'update');
-    Route::get('delete/{id}',$controller.'@'.'delete');
-    Route::get('list',$controller.'@'.'list');
-    Route::get('detail-by-id/{id}',$controller.'@'.'detailById');
+$router->group(['prefix'=>'user'], function () use ($router,$controller) {
+    $router->post('register',       $controller.'@'.'register');
+    $router->post('register-bulk',  $controller.'@'.'registerBulk');
+    $router->post('sync',           $controller.'@'.'sync');
+    $router->post('update[/{id}]',  $controller.'@'.'update');
+    $router->get('delete/{id}',     $controller.'@'.'delete');
+    $router->post('delete',         $controller.'@'.'delete');
+    $router->post('list',           $controller.'@'.'list');
+    $router->get('list',            $controller.'@'.'list');
+    $router->get('detail-by-id/{id}', $controller.'@'.'detailById');
 });
 
 $controller = 'Login';
