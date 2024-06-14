@@ -21,6 +21,7 @@ class SetupModel extends Model {
             CREATE TABLE IF NOT EXISTS users(
                 id CHAR(36) PRIMARY KEY, /* UUID length */
                 nama_user VARCHAR(100),
+                email_user VARCHAR(100),
                 username_user VARCHAR(100),
                 password_user VARCHAR(60), /* Bcrypt length */
                 created_at TIMESTAMP WITH TIME ZONE NOT NULL,
@@ -32,7 +33,7 @@ class SetupModel extends Model {
 
     public static function seed(){
         DB::unprepared("
-            INSERT INTO users(id,nama_user,username_user,password_user,created_at,updated_at) VALUES ('00000000-0000-0000-0000-000000000000','ADMIN','admin','\$2a\$10\$YNvqg2vig8tZpqdz/l2SruQk1On0seDza0UF.OaN2gAroTAObmw/G',NOW(),NOW()) ON CONFLICT (id) DO NOTHING;
+            INSERT INTO users(id,nama_user,email_user,username_user,password_user,created_at,updated_at) VALUES ('00000000-0000-0000-0000-000000000000','ADMIN','admin@gmail.com','admin','\$2a\$10\$YNvqg2vig8tZpqdz/l2SruQk1On0seDza0UF.OaN2gAroTAObmw/G',NOW(),NOW()) ON CONFLICT (id) DO NOTHING;
         ");
     }
 
