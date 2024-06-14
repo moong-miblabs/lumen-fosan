@@ -829,9 +829,9 @@
 	        return response()->json($res,200);
 	    }
 	
-		$arrObj = $request->only(['bulk_data']);
-		$additional = $request->except(['bulk_data']);
-	    
+	    $arrObj     = $request->only(['bulk_data']);
+	    $additional = $request->except(['bulk_data']);
+	
 	    try {
 	        $data = Model::bulkSync($arrObj,$additional);
 	
@@ -979,13 +979,14 @@
 <?php
 $controller = 'User';
 $router->group(['prefix'=>'user','middleware'=>'auth'], function () use ($router,$controller) {
-    $router->post('register',         $controller.'@'.'register');
-$router->post('register-bulk',         $controller.'@'.'registerBulk');
-$router->post('sync',         $controller.'@'.'sync');
-    $router->post('update/{id}',      $controller.'@'.'update');
-    $router->get('delete/{id}',       $controller.'@'.'delete');
-    $router->post('list',              $controller.'@'.'list');
-$router->get('list',              $controller.'@'.'list');
+    $router->post('register',       $controller.'@'.'register');
+    $router->post('register-bulk',  $controller.'@'.'registerBulk');
+    $router->post('sync',           $controller.'@'.'sync');
+    $router->post('update[/{id}]',  $controller.'@'.'update');
+    $router->get('delete/{id}',     $controller.'@'.'delete');
+    $router->post('delete',         $controller.'@'.'delete');
+    $router->post('list',           $controller.'@'.'list');
+    $router->get('list',            $controller.'@'.'list');
     $router->get('detail-by-id/{id}', $controller.'@'.'detailById');
 });
 ```
